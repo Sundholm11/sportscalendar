@@ -1,0 +1,52 @@
+const puppeteer = require('puppeteer')
+
+const scrapeSports = async (url) => {
+    console.log("yo")
+    const browser = await puppeteer.launch()
+    console.log("shit")
+    const page = await browser.newPage()
+    await page.goto(url)
+
+    /*
+    const [week] = await page.$x('/html/body/div[4]/div[3]/div/div/ul[2]')
+    const weekChildren = await week.getProperty('childNodes')
+    const wkProps = await weekChildren.getProperties()
+    const weekLength = wkProps.size
+    */
+
+    let week = []
+
+    for (let i = 1; i < 8; i++) {
+        const [dayList] = await page.$x(`/html/body/div[4]/div[3]/div/div/ul[2]/li[${i}]`)
+        const dayChildren = await dayList.getProperty('childNodes')
+        const childrenProperties = await dayChildren.getProperties()
+
+        let day = []
+
+        for (const [, childNode] of childrenProperties) {
+            let oneClass = []
+            const oneClassChildren = await childNode.getProperty('childNodes')
+            const textRows = await oneClassChildren.getProperties()
+            for (const [, row] of textRows) {
+                const innerText = await row.getProperty('innerText')
+                const text = await innerText.jsonValue()
+                oneClass = [...oneClass, text]
+            }
+            day = [...day, oneClass]
+        }
+
+        console.log("One day: ", day)
+
+        week = [...week, day]
+    }
+
+    // console.log("One week: ", week)
+
+    browser.close()
+
+    return week
+}
+
+// export default scrapeSports
+
+scrapeSports('https://www.campussport.fi/fi/liikuntatarjonta/liikunta-aikataulu/')
