@@ -1,6 +1,13 @@
 <template>
   <div>
     <h1>Sports</h1>
+    <b-container>
+      <b-row class="justify-content-md-center">
+        <b-col md="auto"><button @click="changeDay(-1)">Yesterday</button></b-col>
+        <b-col md="auto"><p>Displaying: {{ selectedDate }}</p></b-col>
+        <b-col md="auto"><button @click="changeDay(1)">Tomorrow</button></b-col>
+      </b-row>
+    </b-container>
     <b-container id="sportstable">
       <b-row id="mainRow">
         <b-col>Time</b-col>
@@ -9,38 +16,29 @@
         <b-col>Sport Sirkka</b-col>
         <b-col>Iskeri</b-col>
       </b-row>
-      <template v-for="number in numbers">
-        <b-row id="secondaryRow" :key="number">
-          <b-col id="timeCol">{{ (7 + number) + '.00 - ' + (8 + number) + '.00' }}</b-col>
-          <b-col id="sportsCol">{{ handleOne(sports[0][0][0], number) }}</b-col>
-          <b-col id="sportsCol">{{ handleOne(sports[0][1][0], number) }}</b-col>
-          <b-col id="sportsCol">{{ handleOne(sports[0][2][0], number) }}</b-col>
-          <b-col id="sportsCol">{{ handleOne(sports[0][3][0], number) }}</b-col>
-        </b-row>
-      </template>
+      <SportsTable />
     </b-container>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import SportsTable from '../components/SportsTable'
 
 export default {
   data () {
     return {
-      numbers: Array.from(Array(16).keys())
+      selectedDate: new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(this.date),
+      date: new Date()
     }
+  },
+  components: {
+    SportsTable
   },
   methods: {
-    handleOne (sport, index) {
-      if (sport[index].length === 0) return ''
-      return sport[index][0]
+    changeDay (amount) {
+      this.date.setDate(this.date.getDate() + amount)
+      this.selectedDate = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(this.date)
     }
-  },
-  computed: {
-    ...mapState([
-      'sports'
-    ])
   }
 }
 </script>
@@ -58,19 +56,5 @@ export default {
   background-color: rgb(243,243,243);
   border-bottom: 1px solid rgb(223,223,223);
   padding: 15px 0px;
-}
-
-#secondaryRow {
-  margin-bottom: 1px;
-}
-
-#timeCol {
-  padding: 12px;
-}
-
-#sportsCol {
-  padding: 12px;
-  border-bottom: 1px solid rgb(223,223,223);
-  cursor: pointer;
 }
 </style>
