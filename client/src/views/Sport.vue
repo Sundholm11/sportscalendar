@@ -12,7 +12,7 @@
       <template v-for="number in numbers">
         <b-row id="secondaryRow" :key="number">
           <b-col id="timeCol">{{ (6 + number) + '.00 - ' + (7 + number) + '.00' }}</b-col>
-          <b-col id="sportsCol">1 of 4</b-col>
+          <b-col id="sportsCol">{{ handleOne(sports[0][0], number) }}</b-col>
           <b-col id="sportsCol">2 of 4</b-col>
           <b-col id="sportsCol">3 of 4</b-col>
           <b-col id="sportsCol">4 of 4</b-col>
@@ -23,11 +23,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data () {
     return {
-      numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+
+      numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     }
+  },
+  methods: {
+    handleOne (sport, index) {
+      if (sport[index].length === 0) return ''
+      return sport[index][0]
+    }
+  },
+  computed: {
+    ...mapState([
+      'sports'
+    ])
   }
 }
 </script>
