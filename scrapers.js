@@ -1,9 +1,8 @@
 const puppeteer = require('puppeteer')
 
 const scrapeSports = async (url) => {
-    console.log("yo")
+    console.log("Starting scrape")
     const browser = await puppeteer.launch()
-    console.log("shit")
     const page = await browser.newPage()
     await page.goto(url)
 
@@ -35,7 +34,7 @@ const scrapeSports = async (url) => {
             day = [...day, oneClass]
         }
 
-        console.log("One day: ", day)
+        // console.log("One day: ", day)
 
         week = [...week, day]
     }
@@ -47,6 +46,6 @@ const scrapeSports = async (url) => {
     return week
 }
 
-// export default scrapeSports
+module.exports = scrapeSports
 
-scrapeSports('https://www.campussport.fi/fi/liikuntatarjonta/liikunta-aikataulu/')
+// scrapeSports('https://www.campussport.fi/fi/liikuntatarjonta/liikunta-aikataulu/')
