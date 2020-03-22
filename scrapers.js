@@ -43,6 +43,7 @@ const scrapeSports = async (url) => {
 
     browser.close()
 
+    console.log("Scrape done, returning data")
     return week
 }
 
