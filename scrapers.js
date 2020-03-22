@@ -13,38 +13,47 @@ const scrapeSports = async (url) => {
     const weekLength = wkProps.size
     */
 
-    let week = []
+    let all = []
 
-    for (let i = 1; i < 8; i++) {
-        const [dayList] = await page.$x(`/html/body/div[4]/div[3]/div/div/ul[2]/li[${i}]`)
-        const dayChildren = await dayList.getProperty('childNodes')
-        const childrenProperties = await dayChildren.getProperties()
+    for (let j = 2; j < 6; j++) {
 
-        let day = []
+        let week = []
 
-        for (const [, childNode] of childrenProperties) {
-            let oneClass = []
-            const oneClassChildren = await childNode.getProperty('childNodes')
-            const textRows = await oneClassChildren.getProperties()
-            for (const [, row] of textRows) {
-                const innerText = await row.getProperty('innerText')
-                const text = await innerText.jsonValue()
-                oneClass = [...oneClass, text]
+        for (let i = 1; i < 8; i++) {
+            const [dayList] = await page.$x(`/html/body/div[4]/div[3]/div/div/ul[${j}]/li[${i}]`)
+            const dayChildren = await dayList.getProperty('childNodes')
+            const childrenProperties = await dayChildren.getProperties()
+
+            let day = []
+
+            for (const [, childNode] of childrenProperties) {
+                let oneClass = []
+                const oneClassChildren = await childNode.getProperty('childNodes')
+                const textRows = await oneClassChildren.getProperties()
+                for (const [, row] of textRows) {
+                    const innerText = await row.getProperty('innerText')
+                    const text = await innerText.jsonValue()
+                    oneClass = [...oneClass, text]
+                }
+                day = [...day, oneClass]
             }
-            day = [...day, oneClass]
+
+            // console.log("One day: ", day)
+
+            week = [...week, day]
         }
 
-        // console.log("One day: ", day)
+        // console.log("One week: ", week)
 
-        week = [...week, day]
+        all = [...all, week]
     }
 
-    // console.log("One week: ", week)
+    console.log("All: ", all)
 
     browser.close()
 
     console.log("Scrape done, returning data")
-    return week
+    return all
 }
 
 module.exports = scrapeSports

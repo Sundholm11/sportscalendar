@@ -6,16 +6,16 @@
         <b-col>Time</b-col>
         <b-col>Edu liikuntasali</b-col>
         <b-col>Edu voimistelusali</b-col>
-        <b-col>Iskeri</b-col>
         <b-col>Sport Sirkka</b-col>
+        <b-col>Iskeri</b-col>
       </b-row>
       <template v-for="number in numbers">
         <b-row id="secondaryRow" :key="number">
-          <b-col id="timeCol">{{ (6 + number) + '.00 - ' + (7 + number) + '.00' }}</b-col>
-          <b-col id="sportsCol">{{ handleOne(sports[0][0], number) }}</b-col>
-          <b-col id="sportsCol">2 of 4</b-col>
-          <b-col id="sportsCol">3 of 4</b-col>
-          <b-col id="sportsCol">4 of 4</b-col>
+          <b-col id="timeCol">{{ (7 + number) + '.00 - ' + (8 + number) + '.00' }}</b-col>
+          <b-col id="sportsCol">{{ handleOne(sports[0][0][0], number) }}</b-col>
+          <b-col id="sportsCol">{{ handleOne(sports[0][1][0], number) }}</b-col>
+          <b-col id="sportsCol">{{ handleOne(sports[0][2][0], number) }}</b-col>
+          <b-col id="sportsCol">{{ handleOne(sports[0][3][0], number) }}</b-col>
         </b-row>
       </template>
     </b-container>
@@ -28,8 +28,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-
-      numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      numbers: Array.from(Array(16).keys())
     }
   },
   methods: {
