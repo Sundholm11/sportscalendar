@@ -12,8 +12,8 @@ export default new Vuex.Store({
   mutations: {
     retrieveSports: async (state) => {
       const sportsData = await services.getSports()
-      console.log("Sportsdata", sportsData)
-      state.sports.push(sportsData)
+      sportsData.map(data => state.sports.push(data))
+      console.log("State after push: ", state.sports)
     }
   },
   actions: {

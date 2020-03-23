@@ -1,12 +1,23 @@
 <template>
-  <div>
+  <b-container id="sportstable" v-if="sports.length !== 0">
+    <b-row id="mainRow">
+      <b-col>Time</b-col>
+      <b-col>Edu liikuntasali</b-col>
+      <b-col>Edu voimistelusali</b-col>
+      <b-col>Sport Sirkka</b-col>
+      <b-col>Iskeri</b-col>
+    </b-row>
     <b-row id="secondaryRow" v-for="number in numbers" :key="number">
       <b-col id="timeCol">{{ (7 + number) + '.00 - ' + (8 + number) + '.00' }}</b-col>
-      <b-col id="sportsCol">{{ handleOne(sports[0][0][0], number) }}</b-col>
-      <b-col id="sportsCol">{{ handleOne(sports[0][1][0], number) }}</b-col>
-      <b-col id="sportsCol">{{ handleOne(sports[0][2][0], number) }}</b-col>
-      <b-col id="sportsCol">{{ handleOne(sports[0][3][0], number) }}</b-col>
+      <b-col id="sportsCol">{{ displayClass(sports[0][dataForDay], number) }}</b-col>
+      <b-col id="sportsCol">{{ displayClass(sports[1][dataForDay], number) }}</b-col>
+      <b-col id="sportsCol">{{ displayClass(sports[2][dataForDay], number) }}</b-col>
+      <b-col id="sportsCol">{{ displayClass(sports[3][dataForDay], number) }}</b-col>
     </b-row>
+  </b-container>
+  <div v-else>
+    <hr />
+    <h5>Loading sports...</h5>
   </div>
 </template>
 
@@ -14,26 +25,50 @@
 import { mapState } from 'vuex'
 
 export default {
+  props: {
+    day: Number
+  },
   data () {
     return {
       numbers: Array.from(Array(16).keys())
     }
   },
   methods: {
-    handleOne (sport, index) {
-      if (sport[index].length === 0) return ''
+    displayClass (sport, index) {
+      if (sport[index] === undefined || sport[index].length === 0) return ''
       return sport[index][0]
     }
   },
   computed: {
     ...mapState([
       'sports'
-    ])
+    ]),
+    dataForDay: function () {
+      if (this.day > 0) {
+        return this.day - 1
+      } else {
+        return 6
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
+#sportstable {
+  margin-top: 40px;
+  margin-bottom: 80px;
+  border: 1px solid rgb(223,223,223);
+  border-bottom: 0;
+  border-radius: 7px;
+}
+
+#mainRow {
+  background-color: rgb(243,243,243);
+  border-bottom: 1px solid rgb(223,223,223);
+  padding: 15px 0px;
+}
+
 #secondaryRow {
   margin-bottom: 1px;
 }
