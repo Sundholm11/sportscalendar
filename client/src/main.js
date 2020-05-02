@@ -17,6 +17,7 @@ new Vue({
   store,
   created () {
     this.$store.dispatch('getSports')
+    this.$store.dispatch('getGyms')
   },
   render: h => h(App)
 }).$mount('#app')

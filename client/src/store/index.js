@@ -7,18 +7,26 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    sports: []
+    sports: [],
+    gyms: []
   },
   mutations: {
     retrieveSports: async (state) => {
       const sportsData = await services.getSports()
       sportsData.map(data => state.sports.push(data))
       console.log("State after push: ", state.sports)
+    },
+    retrieveGyms: async (state) => {
+      const gymData = await services.getGyms()
+      gymData.map(data => state.gyms.push(data))
     }
   },
   actions: {
     getSports: ({ commit }) => {
       commit('retrieveSports')
+    },
+    getGyms: ({ commit }) => {
+      commit('retrieveGyms')
     }
   },
   modules: {

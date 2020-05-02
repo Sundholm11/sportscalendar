@@ -6,4 +6,10 @@ const getSports = async () => {
     return response.data
 }
 
-export default { getSports }
+const getGyms = async () => {
+    console.log("Gym request sent")
+    const response = await axios.get('http://localhost:3003/api/gyms')
+    return response.data
+}
+
+export default { getSports, getGyms }
