@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 
-const scrapeSports = require('./scrapers')
+const scraper = require('./scrapers')
 
 const app = express()
 
@@ -19,7 +19,13 @@ app.get('/', (req, res) => {
 
 app.get('/api/sports', async(req, res) => {
     console.log("Received sports request")
-    const data = await scrapeSports('https://www.campussport.fi/fi/liikuntatarjonta/liikunta-aikataulu/')
+    const data = await scraper.scrapeSports('https://www.campussport.fi/fi/liikuntatarjonta/liikunta-aikataulu/')
+    res.json(data)
+})
+
+app.get('/api/gyms', async(req, res) => {
+    console.log("Received gyms request")
+    const data = await scraper.scrapeGyms('https://campussport.fi/heatmap/')
     res.json(data)
 })
 

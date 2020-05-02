@@ -46,7 +46,7 @@ const scrapeSports = async (url) => {
     return all
 }
 
-const scrapeGyms = async () => {
+const scrapeGyms = async (url) => {
     console.log("Starting gym scrape")
     
     const gyms = ['asa', 'educarium', 'formis', 'roddis', 'ruiskatu']
@@ -57,9 +57,9 @@ const scrapeGyms = async () => {
     const page = await browser.newPage()
     
     for (let j = 0; j < gyms.length; j++) {
-        await page.goto(`https://campussport.fi/heatmap/${gyms[j]}/`)
+        await page.goto(`${url}${gyms[j]}/`)
 
-        console.log(`Going to: https://campussport.fi/heatmap/${gyms[j]}/`)
+        console.log(`Going to: ${url}${gyms[j]}/`)
 
         const allWeekdays = await page.$$('div.column.column-weekday')
 
@@ -91,7 +91,10 @@ const scrapeGyms = async () => {
     return statuses
 }
 
-module.exports = scrapeSports, scrapeGyms
+module.exports = {
+    scrapeSports,
+    scrapeGyms
+}
 
 // scrapeSports('https://www.campussport.fi/fi/liikuntatarjonta/liikunta-aikataulu/')
-// scrapeGyms()
+// scrapeGyms('https://campussport.fi/heatmap/')
