@@ -9,7 +9,7 @@
     </b-row>
     <b-row id="secondaryRow" v-for="number in numbers" :key="number">
       <b-col id="timeCol">{{ (7 + number) + '.00 - ' + (8 + number) + '.00' }}</b-col>
-      <b-col id="sportsCol" v-for="plaza in sportsLength" :key="plaza">{{ displayClass(sports[plaza - 1][dataForDay], number) }}</b-col>
+      <b-col :class="[sportsBase, notEmpty(sports[plaza - 1][dataForDay], number) ? activeClass : '']" v-for="plaza in sportsLength" :key="plaza">{{ displayClass(sports[plaza - 1][dataForDay], number) }}</b-col>
     </b-row>
   </b-container>
   <div v-else>
@@ -27,13 +27,21 @@ export default {
   },
   data () {
     return {
-      numbers: Array.from(Array(16).keys())
+      numbers: Array.from(Array(16).keys()),
+      activeClass: 'sportsActive',
+      sportsBase: 'sportsCol'
     }
   },
   methods: {
     displayClass (sport, index) {
       if (sport[index] === undefined || sport[index].length === 0) return ''
       return sport[index][0]
+    },
+    notEmpty: function (sport, index) {
+      if (sport[index] === undefined || sport[index].length === 0) {
+        return false
+      }
+      return true
     }
   },
   computed: {
@@ -77,9 +85,12 @@ export default {
   padding: 12px;
 }
 
-#sportsCol {
+.sportsCol {
   padding: 12px;
   border-bottom: 1px solid rgb(223,223,223);
+}
+
+.sportsActive {
   cursor: pointer;
 }
 </style>
