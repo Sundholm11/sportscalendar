@@ -4,7 +4,7 @@
     <b-container>
       <b-dropdown split dropright variant="outline-dark" split-variant="outline-dark">
         <template v-slot:button-content>
-          Displaying: {{ selectedGym }}
+          Displaying visits: {{ selectedGym }}
         </template>
         <b-dropdown-item v-for="(gymName, index) in gymNames" :key="gymName" :disabled="gyms.length === 0" @click="setSelectedGym(gymName, index)">{{ gymName }}</b-dropdown-item>
       </b-dropdown>
