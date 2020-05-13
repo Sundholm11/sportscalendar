@@ -29,6 +29,10 @@ const scrapeSports = async (url) => {
                     const text = await innerText.jsonValue()
                     oneClass = [...oneClass, text]
                 }
+                const dataSet = await childNode.getProperty('dataset')
+                const dataColor = await dataSet.getProperty('color')
+                const dataText = await dataColor.jsonValue()
+                if (dataText !== undefined) oneClass = [...oneClass, dataText]
                 day = [...day, oneClass]
             }
 
