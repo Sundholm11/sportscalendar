@@ -14,7 +14,6 @@ export default new Vuex.Store({
     retrieveSports: async (state) => {
       const sportsData = await services.getSports()
       sportsData.map(data => state.sports.push(data))
-      console.log("State after push: ", state.sports)
     },
     retrieveGyms: async (state) => {
       const gymData = await services.getGyms()
