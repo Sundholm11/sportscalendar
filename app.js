@@ -15,11 +15,6 @@ app.use(bodyParser.json())
 
 app.use(express.static(path.join(__dirname, 'client/dist')))
 
-app.get('/', (req, res) => {
-    console.log("Hello world")
-    res.send('Hello world')
-})
-
 app.get('/api/sports', async(req, res) => {
     console.log("Received sports request")
     const data = await scraper.scrapeSports('https://www.campussport.fi/fi/liikuntatarjonta/liikunta-aikataulu/')

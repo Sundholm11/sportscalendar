@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer')
 const scrapeSports = async (url) => {
     console.log("Starting scrape")
 
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
     const page = await browser.newPage()
     await page.goto(url)
 
