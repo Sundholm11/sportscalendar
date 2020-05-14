@@ -1,8 +1,8 @@
 import axios from 'axios'
-let baseUrl = 'http://localhost:3003'
+let baseUrl = 'https://sport-cal.herokuapp.com'
 
-if (process.env.NODE_ENV === 'production') {
-    baseUrl = 'https://sport-cal.herokuapp.com'
+if (process.env.NODE_ENV === 'development') {
+    baseUrl = 'http://localhost:3003'
 }
 
 const getSports = async () => {
