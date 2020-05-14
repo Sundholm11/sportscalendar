@@ -1,6 +1,5 @@
 # Frontend
 client/node_modules
-client/dist
 
 # Backend
 .env
