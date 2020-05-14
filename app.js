@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const path = require('path')
+const history = require('connect-history-api-fallback')
 
 const scraper = require('./scrapers')
 
@@ -25,9 +26,11 @@ app.get('/api/gyms', async(req, res) => {
     res.json(data)
 })
 
-app.use('/', () => {
-    express.static(path.join(__dirname, 'client/dist'))
-})
+const staticMiddleware = express.static(path.join(__dirname, 'client/dist'))
+
+app.use(staticMiddleware)
+app.use(history({ disableDotRule: true, verbose: true }))
+app.use(staticMiddleware)
 
 console.log("Initializing morgan logger")
 morgan.token('body', (req) => {
