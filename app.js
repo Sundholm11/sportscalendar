@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const path = require('path')
-const history = require('connect-history-api-fallback')
 
 const scraper = require('./scrapers')
 
@@ -13,10 +12,6 @@ const app = express()
 app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
-
-app.use(express.static(path.join(__dirname, 'client/dist')))
-app.use(history({ index: '/client/dist/index.html' }))
-app.use(express.static(path.join(__dirname, 'client/dist')))
 
 app.get('/api/sports', async(req, res) => {
     console.log("Received sports request")
@@ -28,6 +23,10 @@ app.get('/api/gyms', async(req, res) => {
     console.log("Received gyms request")
     const data = await scraper.scrapeGyms('https://campussport.fi/heatmap/')
     res.json(data)
+})
+
+app.use('/', () => {
+    express.static(path.join(__dirname, 'client/dist'))
 })
 
 console.log("Initializing morgan logger")
