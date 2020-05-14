@@ -1,7 +1,11 @@
 const app = require('./app')
 const http = require('http')
 
-const PORT = 3003
+let PORT = process.env.PORT
+
+if (PORT === undefined) {
+    PORT = 3003
+}
 
 const server = http.createServer(app)
 
