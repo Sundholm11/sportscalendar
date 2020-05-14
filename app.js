@@ -3,7 +3,8 @@ const helmet = require('helmet')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
-const serveStatic = require('serve-static');
+const path = require('path')
+const history = require('connect-history-api-fallback')
 
 const scraper = require('./scrapers')
 
@@ -13,7 +14,9 @@ app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
 
-app.use(serveStatic(__dirname + "/client/dist"))
+app.use(express.static(path.join(__dirname, 'client/dist')))
+app.use(history({ index: '/client/dist/index.html' }))
+app.use(express.static(path.join(__dirname, 'client/dist')))
 
 app.get('/api/sports', async(req, res) => {
     console.log("Received sports request")
