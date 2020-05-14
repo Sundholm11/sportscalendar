@@ -42,7 +42,7 @@ const scrapeSports = async (url) => {
         all = [...all, week]
     }
 
-    console.log("All: ", all)
+    // console.log("All: ", all)
 
     browser.close()
 
@@ -63,7 +63,7 @@ const scrapeGyms = async (url) => {
     for (let j = 0; j < gyms.length; j++) {
         await page.goto(`${url}${gyms[j]}/`)
 
-        console.log(`Going to: ${url}${gyms[j]}/`)
+        // console.log(`Going to: ${url}${gyms[j]}/`)
 
         const allWeekdays = await page.$$('div.column.column-weekday')
 
@@ -87,7 +87,7 @@ const scrapeGyms = async (url) => {
         statuses = [...statuses, week]
     }
 
-    console.log(statuses)
+    // console.log(statuses)
 
     browser.close()
 
