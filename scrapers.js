@@ -57,7 +57,7 @@ const scrapeGyms = async (url) => {
     
     let statuses = []
 
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
     const page = await browser.newPage()
     
     for (let j = 0; j < gyms.length; j++) {
