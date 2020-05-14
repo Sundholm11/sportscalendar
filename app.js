@@ -3,6 +3,7 @@ const helmet = require('helmet')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const path = require('path')
 
 const scraper = require('./scrapers')
 
