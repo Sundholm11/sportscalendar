@@ -13,7 +13,7 @@ app.use(helmet())
 app.use(cors())
 app.use(bodyParser.json())
 
-app.use(express.static(path.join(__dirname, 'client/dist')))
+app.use(express.static(path.join(__dirname, 'client/dist/')))
 
 app.get('/api/sports', async(req, res) => {
     console.log("Received sports request")
