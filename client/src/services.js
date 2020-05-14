@@ -1,14 +1,13 @@
 import axios from 'axios'
-const baseUrl = 'https://sport-cal.herokuapp.com'
+const baseUrl = '/api'
 
 const getSports = async () => {
-    console.log("Baseurl:", baseUrl)
-    const response = await axios.get(`${baseUrl}/api/sports`)
+    const response = await axios.get(`${baseUrl}/sports`)
     return response.data
 }
 
 const getGyms = async () => {
-    const response = await axios.get(`${baseUrl}/api/gyms`)
+    const response = await axios.get(`${baseUrl}/gyms`)
     return response.data
 }
 
