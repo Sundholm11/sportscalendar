@@ -13,11 +13,11 @@ Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  store,
-  created () {
-    this.$store.dispatch('getSports')
-    this.$store.dispatch('getGyms')
-  },
-  render: h => h(App)
+	router,
+	store,
+	created () {
+		this.$store.dispatch('getSports')
+		this.$store.dispatch('getGyms')
+	},
+	render: h => h(App)
 }).$mount('#app')

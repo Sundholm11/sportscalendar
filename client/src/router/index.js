@@ -7,22 +7,22 @@ import Sport from '../views/Sport.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Sports',
-    component: Sport
-  },
-  {
-    path: '/gyms',
-    name: 'Gyms',
-    component: Gym
-  }
+	{
+		path: '/',
+		name: 'Sports',
+		component: Sport
+	},
+	{
+		path: '/gyms',
+		name: 'Gyms',
+		component: Gym
+	}
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+	mode: 'history',
+	base: process.env.BASE_URL,
+	routes
 })
 
 export default router
