@@ -1,16 +1,28 @@
 <template>
-	<b-col
-		@mouseover="hover = true"
-		@mouseleave="hover = false"
-		:class="[sportsBase, emptyName ? '' : [activeClass, cardColor]]">
-		{{ name }}
-	</b-col>
+    <b-col
+        :id="classId"
+        @mouseover="hover = true"
+        @mouseleave="hover = false"
+        :class="[sportsBase, emptyName ? '' : [activeClass, cardColor]]">
+        {{ name }}
+        <b-popover
+            v-if="!emptyName"
+            :target="classId"
+            triggers="hover"
+            placement="right">
+            {{ name }}
+            {{ time }}
+            <br />
+            {{ instructor }}
+        </b-popover>
+    </b-col>
 </template>
 
 <script>
 export default {
 	props: {
-		sport: Array
+        classId: String,
+        sport: Array
 	},
 	data () {
 		return {
@@ -22,7 +34,13 @@ export default {
 	computed: {
 		name: function () {
 			return this.sport[0]
-		},
+        },
+        time: function () {
+            return this.sport[1]
+        },
+        instructor: function () {
+            return this.sport[2]
+        },
 		emptyName: function () {
 			if (this.name === '') return true
 			return false
