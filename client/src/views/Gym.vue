@@ -1,16 +1,21 @@
 <template>
 	<div>
 		<h1>Gyms</h1>
-		<b-container>
+		<b-container v-if="gyms.length !== 0">
 			<b-dropdown split dropright variant="outline-dark" split-variant="outline-dark">
 				<template v-slot:button-content>
 					Displaying visits: {{ selectedGym }}
 				</template>
-				<b-dropdown-item v-for="(gymName, index) in gymNames" :key="gymName" :disabled="gyms.length === 0" @click="setSelectedGym(gymName, index)">{{ gymName }}</b-dropdown-item>
+				<b-dropdown-item
+                    v-for="(gymName, index) in gymNames"
+                    :key="gymName" :disabled="gyms.length === 0"
+                    @click="setSelectedGym(gymName, index)">
+                        {{ gymName }}
+                </b-dropdown-item>
 			</b-dropdown>
 		</b-container>
 		<hr id="bigdivider"/>
-		<b-container v-if="gyms.length !== 0" variant="outline">
+		<b-container v-if="gyms.length !== 0">
 			<b-row>
 				<b-col>Time</b-col>
 				<b-col>Mon</b-col>
@@ -22,12 +27,7 @@
 				<b-col>Sun</b-col>
 			</b-row>
 			<hr />
-			<div v-if="selectedHeatmap !== null">
-				<b-row v-for="number in numbers" :key="number">
-					<b-col>{{ (6 + number) + '.00' }}</b-col>
-					<b-col v-for="day in weekLength" :key="day">{{ displayVisit(selectedHeatmap[day - 1][number + 1]) }}</b-col>
-				</b-row>
-			</div>
+            <GymTable :heatmap="initialSelectedGym" />
 		</b-container>
 		<div v-else>
 			<h5>Loading gyms...</h5>
@@ -38,33 +38,34 @@
 <script>
 import { mapState } from 'vuex'
 
+import GymTable from '../components/GymTable'
+
 export default {
 	data () {
 		return {
-			selectedGym: null,
+            selectedGym: 'Asa',
+            selectedGymIndex: 0,
 			selectedHeatmap: null,
-			gymNames: ['Asa', 'Educarium', 'Formis', 'Roddis', 'Ruiskatu'],
-			numbers: Array.from(Array(17).keys())
+			gymNames: ['Asa', 'Educarium', 'Formis', 'Roddis', 'Ruiskatu']
 		}
 	},
+    components: {
+        GymTable
+    },
 	methods: {
 		setSelectedGym (gym, index) {
 			this.selectedGym = gym
-			this.selectedHeatmap = this.gyms[index]
-		},
-		displayVisit (slot) {
-			const [, visits] = slot.split("-")
-			if (visits === undefined) return 'Closed'
-			return visits
-		}
-	},
+			this.selectedGymIndex = index
+        }
+    },
 	computed: {
 		...mapState([
 			'gyms'
-		]),
-		weekLength: function () {
-			return this.selectedHeatmap.length
-		}
+        ]),
+        initialSelectedGym: function () {
+            if (this.gyms.length === 0) return null
+            return this.gyms[this.selectedGymIndex]
+        }
 	}
 }
 </script>
