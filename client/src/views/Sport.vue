@@ -3,8 +3,8 @@
 		<h1>Sports</h1>
 		<b-container>
 			<b-row class="justify-content-md-center d-flex align-items-center">
-				<b-col md="auto"><b-button variant="outline-dark" size="sm" @click="changeDay(-1)">Previous day</b-button></b-col>
-                <b-col md="auto">
+				<b-col cols="3" md="auto"><b-button variant="outline-dark" size="sm" @click="changeDay(-1)">Previous day</b-button></b-col>
+                <b-col cols="6" md="auto">
                     <b-form-datepicker
                         size="sm"
                         locale="en"
@@ -12,7 +12,7 @@
                         :value='date'
                         @input='date = new Date($event)'
                         /></b-col>
-				<b-col md="auto"><b-button variant="outline-dark" size="sm" @click="changeDay(1)">Next day</b-button></b-col>
+				<b-col cols="3" md="auto"><b-button variant="outline-dark" size="sm" @click="changeDay(1)">Next day</b-button></b-col>
 			</b-row>
 		</b-container>
 		<SportsTable :day="date.getDay()" />

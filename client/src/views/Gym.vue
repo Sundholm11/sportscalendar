@@ -15,7 +15,7 @@
 			</b-dropdown>
 		</b-container>
 		<hr id="bigdivider"/>
-		<b-container v-if="gyms.length !== 0">
+		<b-container id="gymstable" v-if="gyms.length !== 0">
 			<b-row>
 				<b-col>Time</b-col>
 				<b-col>Mon</b-col>
@@ -73,5 +73,12 @@ export default {
 <style scoped>
 #bigdivider {
 	width: 80%;
+}
+
+@media only screen and (max-width: 700px) {
+    #gymstable {
+        width: 100%;
+        font-size: x-small;
+    }
 }
 </style>

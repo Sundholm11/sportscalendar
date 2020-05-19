@@ -33,7 +33,7 @@ export default {
 	},
 	computed: {
 		name: function () {
-			return this.sport[0]
+            return this.sport[0]
         },
         time: function () {
             return this.sport[1]
@@ -94,7 +94,9 @@ export default {
 	border: solid 1px;
 	border-radius: 5px;
 	border-color: rgba(var(--rgb), 1);
-	transition: background-color 0.5s, color 0.3s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	transition: background-color 0.4s, color 0.1s;
 }
 
 .sportsActive:hover {
@@ -117,4 +119,10 @@ export default {
 .sportsDarkRed { --rgb: 204, 24, 11; }
 
 .sportsOrange { --rgb: 255, 104, 0; }
+
+@media only screen and (max-width: 500px) {
+    .sportsCol {
+        padding: 0;
+    }
+}
 </style>

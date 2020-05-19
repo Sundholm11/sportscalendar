@@ -88,4 +88,17 @@ export default {
 #timeCol {
 	padding: 12px;
 }
+
+@media only screen and (max-width: 700px) {
+    #sportstable {
+        width: 100%;
+        font-size: x-small;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #sportstable {
+        font-size: xx-small;
+    }
+}
 </style>
