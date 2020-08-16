@@ -75,7 +75,11 @@ export default {
 	width: 80%;
 }
 
-@media only screen and (max-width: 700px) {
+#gymstable {
+	padding-bottom: 50px;
+}
+
+@media only screen and (max-width: 770px) {
     #gymstable {
         width: 100%;
         font-size: x-small;
