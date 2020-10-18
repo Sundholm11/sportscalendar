@@ -38,10 +38,11 @@ export default {
             const parsedVisit = parseInt(visits)
             const activityClass = []
 
-            activityClass[0] = this.visitColorCheck(parsedVisit)
+            const visitColor = this.visitColorCheck(parsedVisit)
+            activityClass.push(visitColor)
 
-            if (this.neighbourSimilar(this.heatmap[day][number - 1], activityClass[0])) activityClass.push("borderActivityTop")
-            if (this.neighbourSimilar(this.heatmap[day][number + 1], activityClass[0])) activityClass.push("borderActivityBot")
+            if (this.neighbourSimilar(this.heatmap[day][number - 1], visitColor)) activityClass.push("borderActivityTop")
+            if (this.neighbourSimilar(this.heatmap[day][number + 1], visitColor)) activityClass.push("borderActivityBot")
 
             return activityClass
         },

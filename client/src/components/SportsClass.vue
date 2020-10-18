@@ -3,10 +3,10 @@
         :id="classId"
         @mouseover="hover = true"
         @mouseleave="hover = false"
-        :class="[sportsBase, emptyName ? '' : [activeClass, cardColor]]">
+        :class="[sportsBase, isEmptyName ? '' : [activeClass, cardColor]]">
         {{ name }}
         <b-popover
-            v-if="!emptyName"
+            v-if="!isEmptyName"
             :target="classId"
             triggers="hover"
             placement="right">
@@ -27,8 +27,8 @@ export default {
 	data () {
 		return {
 			hover: false,
-			activeClass: 'sportsActive',
-			sportsBase: 'sportsCol'
+            activeClass: 'sportsActive',
+            sportsBase: 'sportsCol'
 		}
 	},
 	computed: {
@@ -41,7 +41,7 @@ export default {
         instructor: function () {
             return this.sport[2]
         },
-		emptyName: function () {
+		isEmptyName: function () {
 			if (this.name === '') return true
 			return false
 		},
@@ -75,7 +75,7 @@ export default {
 				break
 			}
 			return color
-		}
+        }
 	}
 }
 </script>

@@ -1,14 +1,14 @@
 <template>
 	<b-container id="sportstable" v-if="sports.length !== 0">
 		<b-row id="mainRow">
-			<b-col>Time</b-col>
+			<b-col>Starting Time</b-col>
 			<b-col>Edu liikuntasali</b-col>
 			<b-col>Edu voimistelusali</b-col>
 			<b-col>Sport Sirkka</b-col>
 			<b-col>Iskeri</b-col>
 		</b-row>
 		<b-row id="secondaryRow" v-for="number in numbers" :key="number">
-			<b-col id="timeCol">{{ (7 + number) + '.00 - ' + (8 + number) + '.00' }}</b-col>
+			<b-col id="timeCol">{{ (7 + number) + '.00'}}</b-col>
 			<SportsClass v-for="plaza in sportsLength"
                 :sport="displayClass(sports[plaza - 1][dataForDay], number)"
                 :key="generateId(plaza, number)"
@@ -51,7 +51,8 @@ export default {
 	computed: {
 		...mapState([
 			'sports'
-		]),
+        ]),
+        // Convert Sunday first to Sunday last
 		dataForDay: function () {
 			if (this.day > 0) {
 				return this.day - 1
@@ -61,7 +62,7 @@ export default {
 		},
 		sportsLength: function () {
 			return this.sports.length
-		}
+        }
 	}
 }
 </script>
