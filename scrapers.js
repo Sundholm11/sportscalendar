@@ -29,11 +29,14 @@ const scrapeSports = async (url) => {
 					const text = await innerText.jsonValue()
 					oneClass = [...oneClass, text]
 				}
-				const dataSet = await childNode.getProperty('dataset')
-				const dataColor = await dataSet.getProperty('color')
-				const dataText = await dataColor.jsonValue()
-				if (dataText !== undefined) oneClass = [...oneClass, dataText]
-				day = [...day, oneClass]
+				const classList = await childNode.getProperty('classList')
+				const dataColor = await classList.getProperty('2')
+                const dataColorText = await dataColor.jsonValue()
+                const dataLength = await classList.getProperty('1')
+                const dataLengthText = await dataLength.jsonValue()
+                if (dataColorText !== undefined) oneClass = [...oneClass, dataColorText]
+                if (dataLengthText !== undefined && dataLengthText !== 'empty') oneClass = [...oneClass, dataLengthText]
+                day = [...day, oneClass]
 			}
 
 			week = [...week, day]
@@ -41,8 +44,6 @@ const scrapeSports = async (url) => {
 
 		all = [...all, week]
 	}
-
-	// console.log("All: ", all)
 
 	browser.close()
 
@@ -62,8 +63,6 @@ const scrapeGyms = async (url) => {
 	
 	for (let j = 0; j < gyms.length; j++) {
 		await page.goto(`${url}${gyms[j]}/`)
-
-		// console.log(`Going to: ${url}${gyms[j]}/`)
 
 		const allWeekdays = await page.$$('div.column.column-weekday')
 
@@ -87,8 +86,6 @@ const scrapeGyms = async (url) => {
 		statuses = [...statuses, week]
 	}
 
-	// console.log(statuses)
-
 	browser.close()
 
 	console.log("Scrape done, returning data")
@@ -99,6 +96,3 @@ module.exports = {
 	scrapeSports,
 	scrapeGyms
 }
-
-// scrapeSports('https://www.campussport.fi/fi/liikuntatarjonta/liikunta-aikataulu/')
-// scrapeGyms('https://campussport.fi/heatmap/')
