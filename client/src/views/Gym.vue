@@ -43,10 +43,10 @@ import GymTable from '../components/GymTable'
 export default {
 	data () {
 		return {
-            selectedGym: 'Asa',
+            selectedGym: 'Aurum',
             selectedGymIndex: 0,
 			selectedHeatmap: null,
-			gymNames: ['Asa', 'Educarium', 'Formis', 'Roddis', 'Ruiskatu']
+			gymNames: ['Aurum', 'Educarium', 'Formis', 'Roddis', 'Ruiskatu']
 		}
 	},
     components: {
@@ -83,6 +83,10 @@ export default {
     #gymstable {
         width: 100%;
         font-size: x-small;
+    }
+
+    .col {
+        padding: 0;
     }
 }
 </style>

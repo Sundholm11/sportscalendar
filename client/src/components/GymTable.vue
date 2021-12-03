@@ -1,7 +1,7 @@
 <template>
     <div v-if="heatmap !== null">
         <b-row v-for="number in numbers" :key="number">
-            <b-col :class="timeBase">{{ (6 + number) + '.00' }}</b-col>
+            <b-col :class="timeBase">{{ (5 + number) + ' - ' + (6 + number) }}</b-col>
             <b-col
                 v-for="day in weekDays"
                 :key="day"
