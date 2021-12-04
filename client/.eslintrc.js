@@ -16,6 +16,9 @@ module.exports = {
 		'indent': 0,
 		'eol-last': 0,
         'quotes': 0,
-        'no-tabs': 0
+        'no-tabs': 0,
+        "vue/multi-word-component-names": ["error", {
+            "ignores": ['Sport', 'Gym']
+        }]
 	}
 }
