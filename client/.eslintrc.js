@@ -18,7 +18,7 @@ module.exports = {
         'quotes': 0,
         'no-tabs': 0,
         "vue/multi-word-component-names": ["error", {
-            "ignores": ['Sport', 'Gym']
+            "ignores": ['Sport', 'Gym', 'Banner']
         }]
 	}
 }

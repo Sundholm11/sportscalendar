@@ -2,7 +2,7 @@
 	<div>
 		<h1>Gyms</h1>
 		<b-container v-if="gyms.length !== 0">
-			<b-dropdown split dropright variant="outline-dark" split-variant="outline-dark">
+			<b-dropdown dropright variant="outline-dark" split-variant="outline-dark">
 				<template v-slot:button-content>
 					Displaying visits: {{ selectedGym }}
 				</template>
