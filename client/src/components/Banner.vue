@@ -36,4 +36,10 @@
 #cslink:hover {
 	color: rgb(223, 223, 223);
 }
+
+@media only screen and (max-width: 770px) {
+    #metatitle {
+        padding-left: 0px;
+    }
+}
 </style>

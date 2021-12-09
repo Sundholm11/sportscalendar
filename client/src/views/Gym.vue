@@ -14,7 +14,6 @@
                 </b-dropdown-item>
 			</b-dropdown>
 		</b-container>
-		<hr id="bigdivider"/>
 		<b-container id="gymstable" v-if="gyms.length !== 0">
 			<b-row>
 				<b-col>Time</b-col>
@@ -71,11 +70,8 @@ export default {
 </script>
 
 <style scoped>
-#bigdivider {
-	width: 80%;
-}
-
 #gymstable {
+    margin-top: 25px;
 	padding-bottom: 50px;
 }
 
