@@ -6,11 +6,21 @@ const morgan = require('morgan')
 const path = require('path')
 const history = require('connect-history-api-fallback')
 
+require('dotenv').config()
+
 const scraper = require('./scrapers')
 
 const app = express()
 
-app.use(helmet())
+app.use(
+    helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+            "img-src": ["'self'", "https: data: blob:"],
+        }
+    })
+)
+
 app.use(cors())
 app.use(bodyParser.json())
 
