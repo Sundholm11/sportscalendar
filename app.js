@@ -28,9 +28,16 @@ app.get('/api/gyms', async(req, res) => {
 
 const staticMiddleware = express.static(path.join(__dirname, 'client/dist'))
 
+const allowCrossDomain = (req, res) => {
+    res.header('Access-Control-Allow-Origin', "*")
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.header('Access-Control-Allow-Headers', 'Content-Type')
+}
+
 app.use(staticMiddleware)
 app.use(history({ disableDotRule: true, verbose: true }))
 app.use(staticMiddleware)
+app.use(allowCrossDomain)
 
 console.log("Initializing morgan logger")
 morgan.token('body', (req) => {
