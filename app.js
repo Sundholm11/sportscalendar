@@ -6,8 +6,6 @@ const morgan = require('morgan')
 const path = require('path')
 const history = require('connect-history-api-fallback')
 
-require('dotenv').config()
-
 const scraper = require('./scrapers')
 
 const app = express()
