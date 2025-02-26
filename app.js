@@ -1,6 +1,5 @@
 const express = require('express')
 const helmet = require('helmet')
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const path = require('path')
@@ -20,7 +19,7 @@ app.use(
 )
 
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
 app.get('/api/sports', async(req, res) => {
     console.log("Received sports request")
@@ -43,9 +42,8 @@ const allowCrossDomain = (req, res) => {
 }
 
 app.use(staticMiddleware)
-app.use(history({ disableDotRule: true, verbose: true }))
-app.use(staticMiddleware)
 app.use(allowCrossDomain)
+app.use(history({ disableDotRule: true, verbose: true }))
 
 console.log("Initializing morgan logger")
 morgan.token('body', (req) => {
