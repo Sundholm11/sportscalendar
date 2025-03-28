@@ -8,7 +8,17 @@ const scraper = require('./scrapers')
 
 const app = express()
 
-app.use(helmet())
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
+                styleSrc: ["'self'", "https://cdn.jsdelivr.net"] // Allow Bootstrap
+            }
+        },
+    }),
+  );
 app.use(cors())
 app.use(express.json())
 
