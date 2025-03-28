@@ -30,7 +30,7 @@ app.get('/api/gyms', async(req, res) => {
     }
 })
 
-const staticMiddleware = express.static(path.join(__dirname, 'client/dist'))
+const staticMiddleware = express.static('dist')
 const allowCrossDomain = (req, res) => {
     res.header('Access-Control-Allow-Origin', "*")
     res.header('Access-Control-Allow-Methods', 'GET')
