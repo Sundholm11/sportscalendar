@@ -55,7 +55,12 @@ const scrapeGyms = async (url) => {
     const gyms = { educarium: [], formis: [], roddis: [] } // asa, ruiskatu closed
 
     try {
-        const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+        const browser = await puppeteer.launch({
+            executablePath: process.env.NODE_ENV === "production"
+                ? process.env.PUPPETEER
+                : puppeteer.executablePath(),
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        })
 	    const page = await browser.newPage()
 
         for (const gym of Object.keys(gyms)) {
