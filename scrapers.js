@@ -57,7 +57,7 @@ const scrapeGyms = async (url) => {
     try {
         const browser = await puppeteer.launch({
             executablePath: process.env.NODE_ENV === "production"
-                ? process.env.PUPPETEER
+                ? process.env.PUPPETEER_EXECUTABLE_PATH
                 : puppeteer.executablePath(),
             args: ['--no-sandbox', '--disable-setuid-sandbox']
         })
