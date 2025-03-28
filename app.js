@@ -8,13 +8,15 @@ const scraper = require('./scrapers')
 
 const app = express()
 
+// Allow Bootstrap styling and Google fonts pass CSP
 app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
                 defaultSrc: ["'self'"],
                 scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],
-                styleSrc: ["'self'", "https://cdn.jsdelivr.net"] // Allow Bootstrap
+                styleSrc: ["'self'", "https://cdn.jsdelivr.net", "https://fonts.googleapis.com"],
+                fontSrc: ["'self'", "https://fonts.gstatic.com"],
             }
         },
     }),
