@@ -7,13 +7,15 @@ import Sport from '../views/Sport.vue'
 Vue.use(VueRouter)
 
 const routes = [
+    /*
 	{
 		path: '/',
 		name: 'Sports',
 		component: Sport
 	},
+    */
 	{
-		path: '/gyms',
+		path: '/',
 		name: 'Gyms',
 		component: Gym
 	}

@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<b-container>
 		<h1>Gyms</h1>
 		<b-container v-if="gyms.length !== 0">
 			<b-dropdown dropright variant="outline-dark" split-variant="outline-dark">
@@ -28,10 +28,15 @@
 			<hr />
             <GymTable :heatmap="initialSelectedGym" />
 		</b-container>
-		<div v-else>
-			<h5>Loading gyms...</h5>
-		</div>
-	</div>
+        <b-container v-else-if="gymsRetrieved && gyms.length === 0">
+            <hr />
+            <h5>No data available</h5>
+	    </b-container>
+		<b-container v-else>
+            <hr />
+            <h5>Loading gyms...</h5>
+	    </b-container>
+	</b-container>
 </template>
 
 <script>
@@ -42,10 +47,10 @@ import GymTable from '../components/GymTable'
 export default {
 	data () {
 		return {
-            selectedGym: 'Aurum',
+            selectedGym: 'Educarium',
             selectedGymIndex: 0,
 			selectedHeatmap: null,
-			gymNames: ['Aurum', 'Educarium', 'Formis', 'Roddis', 'Ruiskatu']
+			gymNames: ['Educarium', 'Formis', 'Roddis']
 		}
 	},
     components: {
@@ -59,7 +64,8 @@ export default {
     },
 	computed: {
 		...mapState([
-			'gyms'
+			'gyms',
+            'gymsRetrieved'
         ]),
         initialSelectedGym: function () {
             if (this.gyms.length === 0) return null
@@ -70,6 +76,10 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+    margin-top: 20px;
+}
+
 #gymstable {
     margin-top: 25px;
 	padding-bottom: 50px;

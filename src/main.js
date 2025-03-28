@@ -9,14 +9,13 @@ import router from './router'
 import store from './store'
 
 Vue.use(BootstrapVue)
-
 Vue.config.productionTip = false
 
 new Vue({
 	router,
 	store,
 	created () {
-		this.$store.dispatch('getSports')
+		//this.$store.dispatch('getSports')
 		this.$store.dispatch('getGyms')
 	},
 	render: h => h(App)

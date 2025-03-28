@@ -1,10 +1,12 @@
 <template>
 	<div id="app">
 		<Banner />
+        <!--
 		<div id="nav">
 			<router-link to="/">Sports</router-link> |
 			<router-link to="/gyms">Gyms</router-link>
 		</div>
+        -->
 		<router-view/>
 	</div>
 </template>

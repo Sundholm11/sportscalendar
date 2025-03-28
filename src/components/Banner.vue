@@ -3,7 +3,7 @@
 		<h1 id="title">Welcome to sportscalendar</h1>
 		<div id="metatitle">
 			Quick and easy access to view daily sports - for more info, visit
-			<a id="cslink" href="https://www.campussport.fi/fi/etusivu/">CampusSport</a>
+			<a id="cslink" href="https://www.campussport.fi/">CampusSport</a>
 		</div>
 	</div>
 </template>

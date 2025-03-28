@@ -16,10 +16,10 @@
             />
 		</b-row>
 	</b-container>
-	<div v-else>
+	<b-container v-else>
 		<hr />
 		<h5>Loading sports...</h5>
-	</div>
+	</b-container>
 </template>
 
 <script>

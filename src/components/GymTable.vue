@@ -5,8 +5,8 @@
             <b-col
                 v-for="day in weekDays"
                 :key="day"
-                :class="[gymBase, activityColor(day - 1, number)]">
-                {{ displayVisit(heatmap[day - 1][number]) }}
+                :class="[gymBase, activityColor(day - 1, number - 1)]">
+                {{ displayVisit(heatmap[day - 1][number - 1]) }}
             </b-col>
         </b-row>
     </div>
@@ -25,9 +25,9 @@ export default {
         }
     },
     methods: {
-        displayVisit (slot, number) {
+        displayVisit (slot) {
 			const [, visits] = slot.split("-")
-			if (visits === undefined) return 'NaN'
+			if (visits === undefined) return 'Closed'
 			return visits
 		},
         activityColor (day, number) {
