@@ -52,44 +52,35 @@ const scrapeSports = async (url) => {
 }
 
 const scrapeGyms = async (url) => {
-	console.log("Starting gym scrape")
-	
-	const gyms = ['asa', 'educarium', 'formis', 'roddis', 'ruiskatu']
-	
-	let statuses = []
+    const gyms = { educarium: [], formis: [], roddis: [] } // asa, ruiskatu closed
 
-	const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
-	const page = await browser.newPage()
-	
-	for (let j = 0; j < gyms.length; j++) {
-		await page.goto(`${url}${gyms[j]}/`)
+    try {
+        const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+	    const page = await browser.newPage()
 
-		const allWeekdays = await page.$$('div.column.column-weekday')
+        for (const gym of Object.keys(gyms)) {
+            await page.goto(`${url}${gym}/`)
+            const result = await page.evaluate(() => {
+                const week = []
+                const weekdays = document.querySelectorAll('.column-weekday')
 
-		let week = []
-		
-		for (let i = 0; i < allWeekdays.length; i++) {
-			const divDays = await allWeekdays[i].getProperty('childNodes')
-			const dayHours = await divDays.getProperties()
+                for (const weekday of weekdays) {
+                    const day = []
+                    const hours = weekday.querySelectorAll('.hour')
+                    for (const hour of hours) {
+                        day.push(hour.className)
+                    }
+                    week.push(day)
+                }
+                return week
+            })
+            gyms[gym] = result
+        }
 
-			let day = []
-
-			for (const [, hour] of dayHours) {
-				const hours = await hour.getProperty('className')
-				const value = await hours.jsonValue()
-				day = [...day, value]
-			}
-
-			week = [...week, day]
-		}
-
-		statuses = [...statuses, week]
-	}
-
-	browser.close()
-
-	console.log("Scrape done, returning data")
-	return statuses
+        return gyms
+    } catch(error) {
+        throw Error(error)
+    }
 }
 
 module.exports = {
